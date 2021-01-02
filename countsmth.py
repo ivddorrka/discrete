@@ -5,29 +5,33 @@ Module to count roots of equations and solve systems
 
 import numpy as np
 from sympy import roots
+# from workingequat import korni, check_one, step_2
 
-
-def matritsa(lst, vec):
+def matritsa(tup):
     """
-    function solves systems
-    >>> matritsa([[2.0, 1.0, 1.0], [1.0, -1.0, 0.0], [3.0, -1.0, 2.0]], [2.0, -2.0, 2.0])
+    function solves systems 
+    lst - list of lists of coefficients of each row 
+    vec - list of values of each  row one by one
+    2x + y + z = 2
+    x - y + 0* z = -2
+    3x -y + 2z = 2
+    answer - [x, y, z] values
+    >>> matritsa([[[2.0, 1.0, 1.0], [1.0, -1.0, 0.0], [3.0, -1.0, 2.0]], [2.0, -2.0, 2.0]])
     [-1.  1.  3.]
     """
-    matr = np.array(lst)
-    vector = np.array(vec)
+    matr = np.array(tup[0])
+    vector = np.array(tup[1])
     result = np.linalg.solve(matr, vector)
     return result
-# print(matritsa([[2.0, 1.0, 1.0], [1.0, -1.0, 0.0], [3.0, -1.0, 2.0]], [2.0, -2.0, 2.0]))
-
+# print(matritsa([[[1, 1, 0], [-3, -2, -2], [9, 4, 8]], [2, 9, 29]]))
 
 def rivnynnya(equt):
     """
     Function to find al roots (returns a list of them)
-    >>> 'r**2 + 2*r + 1'
-    [-1]
+    Here: key - root; value - number of its repetitions 
+    >>> 'r**2 - 2* r + 1'
+    {1: 2}    
     """
-    # result = [r for r in solve(equt) if r.is_real] # щоб знайти лише справжні корені (дискримінант більший = 0)
     result = roots(equt)
     return result
-print(rivnynnya('r**2 - 2* r + 1'))
-
+# print(rivnynnya('r**1 - r*=0'))
