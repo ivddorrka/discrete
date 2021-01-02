@@ -23,7 +23,6 @@ def korni(eq):
             new_sh.append(new)
     return ' - '.join(map(str, new_sh)) 
 
-# print(korni('r = r'))
 
 def check_one(eq):
     """
@@ -43,31 +42,6 @@ def check_one(eq):
     return num_roots
 # print(check_one(korni('r = -7*r -16*r -12*r')))
 
-# def step_1(eq):
-#     """
-#     Function for case if all roots are different
-#     Having known roots from user and knowing roots of the equation
-#     here will be found the coefficients for further calculation
-#     roots are from check_one
-#     roots(known) - r(0), r(1) etc - user's inputs
-#     2 = C1 * 1 + 1 * C2
-#     1 = C1 * 5 + 2 * C2
-#     >>> 'r = 7*r -10*r'
-#     ([[1, 1], [5, 2]], [2, 1])
-#     """
-#     known_r = [[0, 2], [1, 1]]
-#     ans = check_one(korni(eq))
-#     lst = []
-#     root_here = [] # here are roots
-#     for i in ans[1]:
-#         root_here.append(i[0])
-
-#     vec = [_[1] for _ in known_r]
-#     for i in range(len(known_r)):
-#         ans = [j**i for j in root_here]
-#         lst.append(ans)
-#     return lst, vec
-# # print(step_1('r = 7*r -10*r'))
 
 def step_2(eq):
     """
@@ -78,7 +52,7 @@ def step_2(eq):
     >>> 'r = -7*r -16*r -12*r'
     ([[1, 1, 0], [-3, -2, -2], [9, 4, 8]], [2, 9, 29])
     """
-    known_r = [[0, 2], [1, 9]]
+    known_r = known_roots()
 
     ans = check_one(korni(eq))
 
@@ -112,7 +86,7 @@ def step_2(eq):
             for spiski in el:
                 # answer = []
                 for elem in range(len(spiski)):
-                    res = spiski[elem]*(ind_r[_]**elem)
+                    res = int(spiski[elem])*(int(ind_r[_])**int(elem))
                     new_x.append(res)
                 # new_x.append(answer)
             new_y.append(new_x)
@@ -120,6 +94,16 @@ def step_2(eq):
     lst = [] # the list of lists of needed coef-s acco-g to rows
     for pix in range(len(tabl)):
         lst.append(tabl[pix][pix])
+    return [lst, vec]
+# print(step_2('r = -7*r -16*r -12*r'))
 
-    return lst
-print(step_2('r = 0*r +r'))
+
+def find_c(eq):
+    """
+    Function finds C1 C2 etc according to coef-s from step_2
+    >>> 'r = -7*r -16*r -12*r'
+    [ 73. -71. -43.]
+    """
+    inputs_here = step_2(eq)
+    return matritsa(inputs_here)
+print(find_c('r = 2*r -1*r'))
