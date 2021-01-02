@@ -43,7 +43,7 @@ def check_one(eq):
 # print(check_one(korni('r = -7*r -16*r -12*r')))
 
 
-def step_2(eq):
+def step_2(eq, known_r):
     """
     For equations, which have some similar roots
     C3 + C1 + 0*C2 = 2
@@ -52,9 +52,7 @@ def step_2(eq):
     >>> 'r = -7*r -16*r -12*r'
     ([[1, 1, 0], [-3, -2, -2], [9, 4, 8]], [2, 9, 29])
     """
-    known_r = known_roots()
-
-    ans = check_one(korni(eq))
+    # known_r = known_roots()
 
     root_here = [] # all roots (as many times as they appear)
     vec = [el[1] for el in known_r]
@@ -98,13 +96,50 @@ def step_2(eq):
 # print(step_2('r = -7*r -16*r -12*r'))
 
 
-def find_c(eq):
+def find_c(eq, known_r):
     """
     Function finds C1, C2... etc according to coef-s from step_2
     >>> 'r = -7*r -16*r -12*r'
     [ 73. -71. -43.]
     """
     rrr = check_one(korni(eq))
-    inputs_here = step_2(eq)
+    inputs_here = step_2(eq, known_r)
     return [round(i, 3) for i in matritsa(inputs_here)], rrr
-print(find_c('r = -7*r -16*r -12*r'))
+# print(find_c('r = -7*r -16*r -12*r', [[0, 2], [1, 9], [2, 29]]))
+
+def func1(eq, n, known_r):
+    """
+    To find first n members
+    """
+    inputs = find_c(eq, known_r)
+    lst = []
+    for i in inputs[1]:
+        lst_2 = []
+        if i[1] >= 2:
+            for j in range(i[1]):
+                ress = round((i[0]**n) * inputs[0][0], 2)
+                lst_2.append(ress)
+                del inputs[0][0]
+            lst.append(lst_2)
+        else:
+            lst_3 = []
+            for j in range(i[1]):
+                res = round((i[0]**n) * inputs[0][j], 2)
+                lst_3.append(res)
+                del inputs[0][0]
+            lst.append(lst_3)
+    result = []
+    for _ in lst:
+        for element in _:
+            ind_el = _.index(element)
+            result.append((n**ind_el) * element)
+    return round(float(sum(result)), 2)
+# print(func1('r = -3*r +13*r +15*r', 3))
+
+def func2(eq, n, known_r):
+    result = []
+    for i in range(n+1):
+        res_1 = func1(eq, i, known_r)
+        result.append(res_1)
+    return result
+print(func2('r = -3*r +13*r +15*r', 3, [[0, 1], [1, 7], [2, 17]]))
