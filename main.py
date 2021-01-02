@@ -47,7 +47,7 @@ def asking_output():
         time.sleep(1)
         # rivn = userequat()
         try:
-            return func1(rivn, int(ask_3), known_r)
+            return func2(rivn, int(ask_3), known_r)
         except ValueError:
             time.sleep(1)
             print("ВиНиКлА пОмИлКа 0_о" + '\n' + 'Спробуйте ще раз!')
@@ -62,7 +62,7 @@ def asking_output():
         ask_3 = input("Введіть кількість перших членів: ")
         time.sleep(1)
         try:
-            return func2(rivn, int(ask_3), known_r)
+            return func1(rivn, int(ask_3), known_r)
         except ValueError:
             time.sleep(1)
             print("ВиНиКлА пОмИлКа 0_о" + '\n' + 'Спробуйте ще раз!')
