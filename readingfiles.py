@@ -10,30 +10,18 @@ def intruction(file):
     """
     readingg = open(file, "r")
     return '\n'.join(map(str, list(readingg)))
-print(intruction("intro"))
-
-time.sleep(1)
 
 
 def userequat():
     """
     to get the start equation
-    # need to fix it to check input
     """
-    type_here = input("Type here: ")
+    type_here = input("Введіть ваше рівняння згідно описаних правил: ")
     if 'r' not in type_here.split() or '=' not in type_here.split():
-        print("Try that again!")
+        print("ВиНиКлА пОмИлКа 0_о" + '\n' + 'Спробуйте ще раз!')
         return userequat()
     else:
         return type_here
-# print(userequat())
-
-print(2*'\n')
-print("Type now all known/given roots as: root's number it's value" +'\n')
-time.sleep(1)
-print("EXAMPLE:" + '\n')
-time.sleep(1)
-print("0 2")
 
 
 def known_roots():
@@ -41,10 +29,17 @@ def known_roots():
     Function to get all known roots from user
     """
     list_korn = []
+    print(2*'\n')
+    print("Введіть всі відомі або задані корені так, як показано в прикладі: індекс кореня, його значення " +'\n')
+    time.sleep(1)
+    print("Приклад:" + '\n')
+    time.sleep(1)
+    print("0 2")
+    time.sleep(1)
     while(True):
         # list_korn = []
-        user_input = input("Type here: ")
-        list_korn.append(user_input.split())
+        user_input = input("Вводіть тут: ")
+        list_korn.append([int(i) for i in user_input.split()])
         if user_input != '':
             continue
         if user_input == '':
@@ -56,7 +51,7 @@ def known_roots():
     for i in list_korn:
         if len(i) != 2:
             time.sleep(0.5)
-            print("There's an error, try again")
+            print("ВиНиКлА пОмИлКа 0_о" + '\n' + 'Спробуйте ще раз!')
             return known_roots()
 
             #цикл тут перевіряє на наявність і правильність введених данних
