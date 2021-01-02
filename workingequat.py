@@ -8,7 +8,7 @@ from readingfiles import userequat, known_roots
 def korni(eq):
     """
     Function creates an equation for further work
-    >>> 'r = r -4*r +3*r'
+    >>> korni('r = r -4*r +3*r')
     r**3 - r**2 - -4*r**1 - +3*r**0
     """
     members = eq.split() 
@@ -27,8 +27,8 @@ def korni(eq):
 def check_one(eq):
     """
     Function checks if there are any repetitions among roots
-    >>> 'r**3 - -7*r**2 - -16*r**1 - -12*r**0'
-    [('Appear more than 1 time: (root, num of rep-s)', [(-2, 2)]), ('others:', [(-3, 1)])]
+    >>> check_one(korni('r = -7*r -16*r -12*r'))
+    [(-3, 1), (-2, 2)]
     """
     roots_here = rivnynnya(eq)
     keys_here = list(roots_here.keys())
@@ -40,7 +40,7 @@ def check_one(eq):
         num_roots.append(res)
 
     return num_roots
-print(check_one(korni('r = -7*r -16*r -12*r')))
+# print(check_one(korni('r = -7*r -16*r -12*r')))
 
 
 def step_2(eq, known_r):
