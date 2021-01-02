@@ -100,10 +100,11 @@ def step_2(eq):
 
 def find_c(eq):
     """
-    Function finds C1 C2 etc according to coef-s from step_2
+    Function finds C1, C2... etc according to coef-s from step_2
     >>> 'r = -7*r -16*r -12*r'
     [ 73. -71. -43.]
     """
+    rrr = check_one(korni(eq))
     inputs_here = step_2(eq)
-    return matritsa(inputs_here)
-print(find_c('r = 2*r -1*r'))
+    return [round(i, 3) for i in matritsa(inputs_here)], rrr
+print(find_c('r = -7*r -16*r -12*r'))
