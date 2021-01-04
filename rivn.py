@@ -83,6 +83,8 @@ def get_coefficients(eq):
             lst.append(1)
     return lst
 # print(get_coefficients('r = -8r -16*r'))
+
+
 def all_elements(eq, known_r, n):
     result = []
     n_last = calc_matrices(eq, known_r, n)
