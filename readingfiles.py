@@ -33,26 +33,29 @@ def known_roots():
     """
     list_korn = []
     print(2*'\n')
-    print("Введіть всі відомі або задані корені послідовно: " +'\n')
+    print("Введіть всі відомі або задані корені послідовно з їхніми індексами: " +'\n')
     time.sleep(1)
     print("Приклад:" + '\n')
     time.sleep(1)
-    print("2" + '\n' + '1')
+    print("0 2" + '\n' + '1 1')
     time.sleep(1)
     while(True):
         user_input = input("Вводіть тут: ")
         try:
-            list_korn.append(user_input)
+            list_korn.append([int(i) for i in user_input.split()])
         except ValueError:
             print("ВиНиКлА пОмИлКа 0_о" + '\n' + 'Спробуйте ще раз!')
-            time.sleep(1)
             return known_roots()
         if user_input != '':
             continue
         if user_input == '':
             del list_korn[-1]
             break
-
-    return [int(j) for j in list_korn]
+    for j in list_korn:
+        if len(j) != 2:
+            time.sleep(1)
+            print("ВиНиКлА пОмИлКа 0_о" + '\n' + 'Спробуйте ще раз!')
+            return known_roots()
+    return list_korn
 
 # print(known_roots())
