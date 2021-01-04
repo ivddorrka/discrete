@@ -1,3 +1,1 @@
-First semester discrete math project
-TO USE PROJECT - RUN main.py
-Have fun
+First semester discrete math project. (TO USE PROJECT - RUN main.py)
