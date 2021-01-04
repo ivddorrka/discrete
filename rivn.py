@@ -84,40 +84,14 @@ def get_coefficients(eq):
     return lst
 # print(get_coefficients('r = -8r -16*r'))
 
-
-def all_elements(eq, known_r, n):
-    result = []
-    n_last = calc_matrices(eq, known_r, n)
-    for i in range(n+1):
-        res = calc_matrices(eq, known_r, i)
-        result.append(res)
-    del result[-1]
-    result.append(n_last)
-    return result
-
-def beat_output(lst):
+def modify_roots(lst):
     """
-    For beautiful output of all a(n) user wants
-    >>> beat_output([88.0, 4.0, -5, 440])
-    a(0) = 88.0
-    a(1) = 4.0
-    a(2) = -5
-    a(3) = 440
+    To modify knoown_roots()
+    >>> modify_roots([[0,2], [1, 9], [2, 29]])
+    [2, 9, 29]
     """
-    str_ott = []
-    for i in range(len(lst)):
-        res = 'a({}) = {}'.format(i, lst[i])
-        str_ott.append(res)
-    return '\n'.join(map(str, str_ott))
-# print(beat_output([88.0, 4.0, -5, 440]))
-
-# print(all_elements('r = 6*r -12*r +8*r', [-5, 4, 88], 3))
-# print(get_coefficients('r = 6*r -12*r +8*r'))
-# print(build_matrix([7, 10, -10]))
-# print(calc_matrices('r = 6*r -12*r +8*r', [-5, 4, 88], 3))
-# # print(calc_matrices('r = 7*r -10*r', [2, 1], 3))
-# print(calc_matrices('r = -8*r -16*r', [4, -4], 3))
-# print(all_elements('r = -8*r -16*r', [4, -4], 3))
-# print(calc_matrices('r = 6*r -12*r +8*r', [-5, 4, 88], 3))
-# print(all_elements('r = 6*r -12*r +8*r', [-5, 4, 88], 3))
-# print(calc_matrices('r = -8*r -16*r', [4, -4], 3))
+    res = []
+    for i in lst:
+        res.append(i[1])
+    return res
+# print(modify_roots([[0,2], [1, 9], [2, 29]]))
