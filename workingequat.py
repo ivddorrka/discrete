@@ -9,7 +9,7 @@ def korni(eq):
     """
     Function creates an equation for further work
     >>> 'r = r -4*r +3*r'
-    r**3 - r**2 - -4*r**1 - +3*r**0
+    'r**3 - r**2 - -4*r**1 - +3*r**0'
     """
     members = eq.split() 
     del members[1]
@@ -27,8 +27,8 @@ def korni(eq):
 def check_one(eq):
     """
     Function checks if there are any repetitions among roots
-    >>> 'r**3 - -7*r**2 - -16*r**1 - -12*r**0'
-    [('Appear more than 1 time: (root, num of rep-s)', [(-2, 2)]), ('others:', [(-3, 1)])]
+    >>> check_one(korni('r = -7*r -16*r -12*r'))
+    [(-3, 1), (-2, 2)]
     """
     roots_here = rivnynnya(eq)
     keys_here = list(roots_here.keys())
@@ -49,10 +49,9 @@ def step_2(eq, known_r):
     C3 + C1 + 0*C2 = 2
     -3*C3 -2*C1 -2*C2 = 9
     9*C3 + 4*C1 + 8*C2 = 29
-    >>> 'r = -7*r -16*r -12*r'
-    ([[1, 1, 0], [-3, -2, -2], [9, 4, 8]], [2, 9, 29])
+    >>> step_2('r = -7*r -16*r -12*r', [[0, 2], [1, 9], [2, 29]])
+    [[[1, 1, 0], [-3, -2, -2], [9, 4, 8]], [2, 9, 29]]
     """
-    # known_r = known_roots()
 
     root_here = [] # all roots (as many times as they appear)
     vec = [el[1] for el in known_r]
@@ -93,6 +92,8 @@ def step_2(eq, known_r):
     for pix in range(len(tabl)):
         lst.append(tabl[pix][pix])
     return [lst, vec]
+    # return lst
+
 # print(step_2('r = -7*r -16*r -12*r', [[0, 2], [1, 9], [2, 29]]))
 
 
@@ -109,7 +110,9 @@ def find_c(eq, known_r):
 
 def func1(eq, n, known_r):
     """
-    To find first n members
+    To find the n-th members
+    >>> func1('r = -3*r +13*r +15*r', 3, [[0, 1], [1, 7], [2, 17]])
+    55.0
     """
     inputs = find_c(eq, known_r)
     lst = []
@@ -134,13 +137,34 @@ def func1(eq, n, known_r):
             ind_el = _.index(element)
             result.append((n**ind_el) * element)
     return round(float(sum(result)), 2)
-# print(func1('r = -3*r +13*r +15*r', [[0, ]]3))
-print(func1('r = -7*r -16*r -12*r', 1000, [[0, 2], [1, 9], [2, 29]]))
+
+# print(func1('r = -3*r +13*r +15*r', 3, [[0, 1], [1, 7], [2, 17]]))
 
 def func2(eq, n, known_r):
+    """
+    Function returns first n elements
+    >>> func2('r = -3*r +13*r +15*r', 3, [[0, 1], [1, 7], [2, 17]])
+    [1.0, 7.0, 17.0, 55.0]
+    """
     result = []
     for i in range(n+1):
         res_1 = func1(eq, i, known_r)
         result.append(res_1)
     return result
 # print(func2('r = -3*r +13*r +15*r', 3, [[0, 1], [1, 7], [2, 17]]))
+
+def beat_output(lst):
+    """
+    For beautiful output of all a(n) user wants
+    >>> beat_output([88.0, 4.0, -5, 440])
+    a(0) = 88.0
+    a(1) = 4.0
+    a(2) = -5
+    a(3) = 440
+    """
+    str_ott = []
+    for i in range(len(lst)):
+        res = 'a({}) = {}'.format(i, lst[i])
+        str_ott.append(res)
+    return '\n'.join(map(str, str_ott))
+# print(beat_output(func2('r = -3*r +13*r +15*r', 3, [[0, 1], [1, 7], [2, 17]])))
